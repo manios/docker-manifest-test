@@ -11,3 +11,7 @@ script:
       # build image
       docker build -t manios/manifest-test .
     )
+
+after_script:
+  - (docker images | egrep "manios/manifest-test +latest") || travis_terminate 1;
+  - docker rmi "manios/manifest-test:latest"
