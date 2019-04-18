@@ -1,6 +1,6 @@
-FROM alpine:latest as mybase
+# FROM alpine:latest as mybase
 # FROM arm32v7/alpine:latest as mybase
-# FROM arm32v6/alpine:latest as mybase
+FROM arm32v6/alpine:latest as mybase
 
 COPY qemu-arm-static /usr/bin/
 
