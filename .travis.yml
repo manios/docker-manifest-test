@@ -2,19 +2,17 @@ language: bash
 services: docker
 
 env:
-- MYIMAGE_NAME=arm32v6/alpine
+  global:
+    - BASE_IMAGE_NAME=alpine:latest
+    - MY_IMAGE_NAME=manifest-test:latest
 
 script:
   - |
     (
-      # download qemu
-      curl -L https://github.com/multiarch/qemu-user-static/releases/download/v3.1.0-3/qemu-arm-static.tar.gz | tar zxvf - -C .
-      # prepare qemu
-      docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
       # build image
-      docker build -t manios/manifest-test --build-arg FROM_IMAGE_NAME=$MYIMAGE_NAME .
+      docker build -t manios/$MY_IMAGE_NAME --build-arg FROM_IMAGE_NAME=$BASE_IMAGE_NAME .
     )
 
 after_script:
   - (docker images | egrep "manios/manifest-test +latest") || travis_terminate 1;
-  - docker rmi "manios/manifest-test:latest"
+  - docker rmi "manios/$MY_IMAGE_NAME"
