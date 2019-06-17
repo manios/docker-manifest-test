@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# QEMU version variables
+QEMU_EXE=qemu-arm-static
+QEMU_VERSION=v4.0.0-2
+
+# download qemu
+curl -L https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_EXE}/${QEMU_VERSION}.tar.gz | tar zxvf - -C .

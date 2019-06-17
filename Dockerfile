@@ -3,6 +3,8 @@
 ARG FROM_IMAGE_NAME=alpine:latest
 FROM $FROM_IMAGE_NAME as mybase
 
+COPY qemu-arm-static /usr/bin/
+
 COPY iterate1day.sh /
 
 RUN chmod 744 iterate1day.sh
