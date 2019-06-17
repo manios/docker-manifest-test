@@ -4,7 +4,9 @@ services: docker
 env:
   global:
     - BASE_IMAGE_NAME=arm32v6/alpine:latest
-    - MY_IMAGE_NAME=manifest-test:armv6
+    - MY_IMAGE_NAME=manifest-test
+    - MY_IMAGE_TAG=armv6
+    - MY_IMAGE_FULL_NAME=${MY_IMAGE_NAME}:${MY_IMAGE_TAG}
     - QEMU_EXE=qemu-arm-static
     - QEMU_VERSION=v4.0.0-2
 
@@ -16,9 +18,9 @@ script:
       # prepare qemu
       docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
       # build image
-      docker build -t manios/$MY_IMAGE_NAME --build-arg FROM_IMAGE_NAME=$BASE_IMAGE_NAME .
+      docker build -t manios/$MY_IMAGE_FULL_NAME --build-arg FROM_IMAGE_NAME=$BASE_IMAGE_NAME .
     )
 
 after_script:
-  - (docker images | egrep "manios/manifest-test +latest") || travis_terminate 1;
-  - docker rmi "manios/$MY_IMAGE_NAME"
+  - (docker images | egrep "manios/${MY_IMAGE_NAME} +${MY_IMAGE_TAG}") || travis_terminate 1;
+  - docker rmi "manios/$MY_IMAGE_FULL_NAME"
