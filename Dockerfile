@@ -3,6 +3,8 @@
 ARG FROM_IMAGE_NAME=alpine:latest
 FROM $FROM_IMAGE_NAME as mybase
 
+# COPY qemu-arm-static /usr/bin/
+
 COPY iterate1day.sh /
 
 RUN chmod 744 iterate1day.sh
@@ -20,3 +22,9 @@ CMD ["/iterate1day.sh"]
 # docker push manios/manifest-test:latest manios/manifest-test:armv6 manios/manifest-test:armv7
 
 # docker annotate manios/manifest-test:4.4.3 
+
+#docker manifest create manios/manifest-test:2.0 manios/manifest-test:latest manios/manifest-test:armv6-latest manios/manifest-test:armv7-latest
+
+# docker manifest create manios/manifest-test:2.0 manios/manifest-test:latest 
+# docker manifest annotate manios/manifest-test:2.0 manios/manifest-test:armv6-latest --arch arm --os linux --variant v6
+# docker manifest annotate manios/manifest-test:2.0 manios/manifest-test:armv6-latest --arch arm --os linux --variant v7
