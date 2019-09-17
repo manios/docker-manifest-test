@@ -8,7 +8,7 @@ fi
 
 MY_MANIFEST_NAME="manios/${DOCKER_REPO}:${REPO_BRANCH}"
 
-docker manifest create --amend ${MY_MANIFEST_NAME} ${IMAGE_NAME}
+docker manifest create ${MY_MANIFEST_NAME} ${IMAGE_NAME}
 
 if [ -z $ALPINE_ARCHITECTURE ]; then
     echo "Architecture part is not empty"
