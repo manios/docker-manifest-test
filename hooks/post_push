@@ -1,0 +1,19 @@
+#!/bin/bash
+
+MYVARSFILE=imagevars.sh
+if [ -f ${MYVARSFILE} ]; then
+    echo "Loading custom image name from file ${MYVARSFILE}"
+    . ${MYVARSFILE}
+fi
+
+MY_MANIFEST_NAME="manios/${DOCKER_REPO}:${REPO_BRANCH}"
+
+docker manifest create --amend ${MY_MANIFEST_NAME} ${IMAGE_NAME}
+
+if [ -z $ALPINE_ARCHITECTURE ]; then
+    echo "Architecture part is not empty"
+    docker manifest annotate ${MY_MANIFEST_NAME} $IMAGE_NAME --arch ${ALPINE_ARCHITECTURE} --os linux --variant ${ALPINE_ARC_VARIANT}
+else
+
+echo "Pushing manifest ${MY_MANIFEST_NAME}"
+docker manifest push ${MY_MANIFEST_NAME}

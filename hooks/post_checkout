@@ -40,3 +40,6 @@ if [ "${ARCHITECTURE}" == "arm" ]; then
 fi
 
 echo "export ALPINE_IMAGE_NAME=${FROM_IMAGE_NAME}" > imagevars.sh
+echo "export ALPINE_ARCHITECTURE=${ARCHITECTURE}" >> imagevars.sh
+echo "export ALPINE_ARC_VARIANT=${ARC_VARIANT}" >> imagevars.sh
+echo "export REPO_BRANCH=${MY_BRANCH}" >> imagevars.sh
