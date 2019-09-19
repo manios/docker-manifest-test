@@ -8,7 +8,7 @@ if [ -f ${MYVARSFILE} ]; then
     . ${MYVARSFILE}
 fi
 
-MY_MANIFEST_NAME="manios/${DOCKER_REPO}:${REPO_BRANCH}"
+MY_MANIFEST_NAME="${DOCKER_REPO}:${REPO_BRANCH}"
 
 docker manifest create ${MY_MANIFEST_NAME} ${IMAGE_NAME}
 
@@ -18,4 +18,4 @@ if [ -z $ALPINE_ARCHITECTURE ]; then
 else
 
 echo "Pushing manifest ${MY_MANIFEST_NAME}"
-docker manifest push ${MY_MANIFEST_NAME}
+docker manifest push --purge ${MY_MANIFEST_NAME}

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -exu
+
+# Install the latest version of Docker EE
+apt-get -y update
+apt-get -y --only-upgrade install docker-ee
+docker info
 
 # Register qemu-*-static for all supported processors except the 
 # current one, but also remove all registered binfmt_misc before
