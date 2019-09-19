@@ -7,6 +7,9 @@ apt-get -y update
 apt-get -y --only-upgrade install docker-ee
 docker info
 
+echo "Is docker manifest enabled? " && \
+cat ~/.docker/config.json
+
 # Register qemu-*-static for all supported processors except the 
 # current one, but also remove all registered binfmt_misc before
 
