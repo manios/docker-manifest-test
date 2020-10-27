@@ -1,0 +1,20 @@
+image: manios/manifest-test:crabos
+manifests:
+  -
+    image: manios/manifest-test:crabos-linux-arm-v6
+    platform:
+      architecture: arm
+      variant: v6
+      os: linux
+  -
+    image: manios/manifest-test:crabos-linux-arm-v7
+    platform:
+      architecture: arm
+      variant: v7
+      os: linux
+  -
+    image: manios/manifest-test:crabos-linux-amd64
+    platform:
+      architecture: amd64
+      os: linux
+      

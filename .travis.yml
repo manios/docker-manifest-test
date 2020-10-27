@@ -4,13 +4,20 @@ services: docker
 env:
   global:
     - BASE_IMAGE_NAME=alpine:latest
-    - MY_IMAGE_NAME=manifest-test:latest
+    - MY_IMAGE_NAME=manifest-test:crabos
 
 script:
   - |
     (
+      curl  -o manifest-tool https://github.com/estesp/manifest-tool/releases/download/v1.0.3/manifest-tool-linux-amd64
+      chmod 744 manifest-tool
       # build image
-      docker build -t manios/$MY_IMAGE_NAME --build-arg FROM_IMAGE_NAME=$BASE_IMAGE_NAME .
+      docker build -t manios/$MY_IMAGE_NAME-linux-amd64 --platform="linux/amd64" .
+      docker build -t manios/$MY_IMAGE_NAME-linux-arm-v6 --platform="linux/arm/v6" .
+      docker build -t manios/$MY_IMAGE_NAME-linux-arm-v7 --platform="linux/arm/v7" .
+      #
+      #
+      ./manifest-tool push from-spec ochi.yml
     )
 
 after_script:
