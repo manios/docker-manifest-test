@@ -67,7 +67,7 @@ jobs:
             --platform linux/amd64 linux/arm/v6 linux/arm/v7 \
             --tag manifest-test:test-actions \
             --push \
-            --file ./Dockerfile . \
+            --file ./Dockerfile .
       -
         name: Inspect image
         run: |
