@@ -66,8 +66,8 @@ jobs:
             --progress plain \          
             --platform linux/amd64 linux/arm/v6 linux/arm/v7 \
             --tag manifest-test:test-actions \
-            --file ./Dockerfile ./ \
-            --push
+            --push \
+            --file ./Dockerfile . \
       -
         name: Inspect image
         run: |
