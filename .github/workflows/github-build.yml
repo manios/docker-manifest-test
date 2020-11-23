@@ -49,16 +49,16 @@ jobs:
       #       --output "type=image,push=false" \
       #       --tag manifest-test:test-actions \
       #       --file ./Dockerfile ./
-      # -
-      #   name: Docker Buildx (push)
-      #   run: |
-      #     docker buildx build \
-      #       --progress plain \          
-      #       --cache-from "type=local,src=/tmp/.buildx-cache" \
-      #       --platform linux/amd64 \
-      #       --tag manifest-test:test-actions \
-      #       --file ./Dockerfile ./ \
-      #       --push         
+      -
+        name: Docker Buildx (push)
+        run: |
+          docker buildx build \
+            --progress plain \          
+            --cache-from "type=local,src=/tmp/.buildx-cache" \
+            --platform linux/amd64 \
+            --tag manios/manifest-test:test-actions-auto \
+            --file ./Dockerfile ./ \
+            --push         
       -
         name: Build and publish image
         uses: ilteoood/docker_buildx@master
@@ -67,9 +67,13 @@ jobs:
           imageName: manios/manifest-test
           tag: test-actions
           platform: linux/amd64,linux/arm/v6,linux/arm/v7
-          # dockerHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
-          # dockerHubPassword: ${{ secrets.DOCKERHUB_TOKEN }}
+          dockerHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerHubPassword: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Inspect image
+        name: Inspect image 1
         run: |
-          docker buildx imagetools inspect manifest-test:test-actions
+          docker buildx imagetools inspect manios/manifest-test:test-actions
+      -
+        name: Inspect image 2
+        run: |
+          docker buildx imagetools inspect manios/manifest-test:test-actions-auto
