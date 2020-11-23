@@ -59,15 +59,16 @@ jobs:
       #       --tag manifest-test:test-actions \
       #       --file ./Dockerfile ./ \
       #       --push         
-    - name: Build and publish image
-      uses: ilteoood/docker_buildx@master
-      with:
-        publish: true
-        imageName: manifest-test
-        tag: test-actions
-        platform: linux/amd64 linux/arm/v6 linux/arm/v7
-        dockerHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
-        dockerHubPassword: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and publish image
+        uses: ilteoood/docker_buildx@master
+        with:
+          publish: true
+          imageName: manifest-test
+          tag: test-actions
+          platform: linux/amd64 linux/arm/v6 linux/arm/v7
+          dockerHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerHubPassword: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Inspect image
         run: |
