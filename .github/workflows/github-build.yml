@@ -64,7 +64,7 @@ jobs:
         uses: ilteoood/docker_buildx@master
         with:
           publish: true
-          imageName: manifest-test
+          imageName: manios/manifest-test
           tag: test-actions
           platform: linux/amd64,linux/arm/v6,linux/arm/v7
           dockerHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
