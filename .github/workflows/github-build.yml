@@ -38,27 +38,36 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      -
-        name: Docker Buildx (build)
-        run: |
-          docker buildx build \
-            --progress plain \
-            --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --cache-to "type=local,dest=/tmp/.buildx-cache" \
-            --platform linux/amd64 \
-            --output "type=image,push=false" \
-            --tag manifest-test:test-actions \
-            --file ./Dockerfile ./
+      # -
+      #   name: Docker Buildx (build)
+      #   run: |
+      #     docker buildx build \
+      #       --progress plain \
+      #       --cache-from "type=local,src=/tmp/.buildx-cache" \
+      #       --cache-to "type=local,dest=/tmp/.buildx-cache" \
+      #       --platform linux/amd64 \
+      #       --output "type=image,push=false" \
+      #       --tag manifest-test:test-actions \
+      #       --file ./Dockerfile ./
+      # -
+      #   name: Docker Buildx (push)
+      #   run: |
+      #     docker buildx build \
+      #       --progress plain \          
+      #       --cache-from "type=local,src=/tmp/.buildx-cache" \
+      #       --platform linux/amd64 \
+      #       --tag manifest-test:test-actions \
+      #       --file ./Dockerfile ./ \
+      #       --push         
       -
         name: Docker Buildx (push)
         run: |
           docker buildx build \
             --progress plain \          
-            --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --platform linux/amd64 \
+            --platform linux/amd64 linux/arm/v6 linux/arm/v7 \
             --tag manifest-test:test-actions \
             --file ./Dockerfile ./ \
-            --push         
+            --push
       -
         name: Inspect image
         run: |
