@@ -59,7 +59,6 @@ jobs:
       #       --tag manifest-test:test-actions \
       #       --file ./Dockerfile ./ \
       #       --push         
-      -
     - name: Build and publish image
       uses: ilteoood/docker_buildx@master
       with:
