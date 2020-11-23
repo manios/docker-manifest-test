@@ -58,7 +58,8 @@ jobs:
             --platform linux/amd64 \
             --output "type=image,push=true" \
             --tag manifest-test:test-actions \
-            --file ./Dockerfile ./            
+            --file ./Dockerfile ./ \
+            --push         
       -
         name: Inspect image
         run: |
