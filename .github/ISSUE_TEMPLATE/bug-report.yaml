@@ -23,10 +23,22 @@ body:
     attributes:
       label: Image information
       description: |
-        Can you please give us some information about the image you are using? In order to achive this, post here the output of the command:
+        Can you please give us some information about the image you are using? In order to achieve this, please post here the output of the command:
         
         ```shell
         docker inspect --format='{{range $k,$v := .Config.Labels}}{{printf "* %s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v}}{{end}}{{"\n"}}{{end}}'  manios/nagios:[TAG]
+        ```
+        Example output:
+        
+        ```
+        * build: 5
+        * gitCommit: c34e48cb6866b1a2bb77adf4d69feeab534ecc84
+        * homepage: https://www.nagios.com/
+        * maintainer: Christos Manios <maniopaido@gmail.com>
+        * nagiosPluginsVersion: 2.3.3
+        * nagiosVersion: 4.4.6
+        * name: Nagios
+        * nrpeVersion: 4.0.3
         ```
     validations:
       required: true
@@ -41,6 +53,12 @@ body:
         docker exec -it [container-name] /bin/sh -c 'apk --print-arch'
         ```
         in your running container.
+
+        Example output:
+        
+        ```
+        amd64
+        ```
       multiple: false
       options:
         - x86
