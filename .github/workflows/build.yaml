@@ -89,7 +89,7 @@ jobs:
             --build-arg "FROM_IMAGE_NAME=alpine:3.21.3" \
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
-            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
+            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix1 \
             --output "type=image,push=false" .
           sed -i 's/^FROM alpine.*$/FROM alpine:3.12 as mybase/' Dockerfile
           docker buildx build \
@@ -100,7 +100,7 @@ jobs:
             --build-arg "FROM_IMAGE_NAME=alpine:3.12" \
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
-            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
+            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix2 \
             --output "type=image,push=false" .
       - name: 'Docker Buildx: Push to Dockerhub'
         run: |
@@ -109,10 +109,18 @@ jobs:
           docker buildx build \
             --progress plain \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
-            --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 \
+            --platform linux/386,linux/amd64,linux/arm64 \
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
-            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
+            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix1 \
+            --output "type=image,push=true" .
+          docker buildx build \
+            --progress plain \
+            --cache-from "type=local,src=/tmp/.buildx-cache" \
+            --platform linux/arm/v6,linux/arm/v7 \
+            --label "gitCommit=${{ github.sha }}" \
+            --label "org.opencontainers.image.revision=${{ github.sha }}" \
+            --tag ${GITHUB_ACTOR}/manifest-test:alpinemix2 \
             --output "type=image,push=true" .
       - name: Inspect image
         run: |
