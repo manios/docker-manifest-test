@@ -1,4 +1,4 @@
-FROM alpine:3.21.3 as mybase
+FROM alpine:3.21.3 AS mybase
 
 # COPY qemu-arm-static /usr/bin/
 
