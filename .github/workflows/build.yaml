@@ -86,7 +86,7 @@ jobs:
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --platform linux/386,linux/amd64,linux/arm64 \
-            --build-arg "alpine:3.21.3" \
+            --build-arg "FROM_IMAGE_NAME=alpine:3.21.3" \
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
@@ -96,7 +96,7 @@ jobs:
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --platform linux/arm/v6,linux/arm/v7 \
-            --build-arg "alpine:3.12" \
+            --build-arg "FROM_IMAGE_NAME=alpine:3.12" \
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
