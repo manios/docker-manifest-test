@@ -91,6 +91,7 @@ jobs:
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix \
             --output "type=image,push=false" .
+          sed -i 's/^FROM alpine.*$/FROM alpine:3.12 as mybase/' Dockerfile
           docker buildx build \
             --progress plain \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
