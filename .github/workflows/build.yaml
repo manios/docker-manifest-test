@@ -92,6 +92,7 @@ jobs:
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix1 \
             --output "type=image,push=false" .
           sed 's/^FROM alpine.*$/FROM alpine:3.12 as mybase/' Dockerfile > Dockerfile2
+          cat Dockerfile2
           docker buildx build \
             --progress plain \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
@@ -122,8 +123,6 @@ jobs:
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix2 \
             --output "type=image,push=true" .
-          # docker manifest create manios/manifest-test:alpinemix manios/manifest-test:alpinemix1 manios/manifest-test:alpinemix2
-          # docker push manios/manifest-test:alpinemix
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ${GITHUB_ACTOR}/manifest-test:alpinemix
+          docker buildx imagetools inspect ${GITHUB_ACTOR}/manifest-test:alpinemix1
