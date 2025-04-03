@@ -115,4 +115,4 @@ jobs:
             --output "type=image,push=true" .
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ${GITHUB_ACTOR}/nagios:alpinemix
+          docker buildx imagetools inspect ${GITHUB_ACTOR}/manifest-test:alpinemix
