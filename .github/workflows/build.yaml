@@ -120,7 +120,7 @@ jobs:
             --label "gitCommit=${{ github.sha }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix2 \
-            --output "type=image,push=false" ./alpine3.12
+            --output "type=image,push=true" ./alpine3.12
       - name: Inspect image
         run: |
           docker buildx imagetools inspect ${GITHUB_ACTOR}/manifest-test:alpinemix1
