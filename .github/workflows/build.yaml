@@ -91,7 +91,7 @@ jobs:
             --label "org.opencontainers.image.revision=${{ github.sha }}" \
             --tag ${GITHUB_ACTOR}/manifest-test:alpinemix1 \
             --output "type=image,push=false" -f Dockerfile .
-          sed 's/^FROM alpine.*$/FROM alpine:3.12 as mybase312 /' Dockerfile > Dockerfile.alpine312
+          sed 's/^FROM alpine.*$/FROM alpine:3.12 AS mybase312 /' Dockerfile > Dockerfile.alpine312
           cat Dockerfile.alpine312
           docker buildx build \
             --progress plain \
