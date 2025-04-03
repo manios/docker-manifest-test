@@ -104,7 +104,7 @@ jobs:
             --output "type=image,push=false" .
       - name: 'Docker Buildx: Push to Dockerhub'
         run: |
-          echo "== This branch is : ${GITHUB_REF}"
+          echo "== This branch is : ${GITHUB_REF} "
           echo "Will push image ${GITHUB_ACTOR}/nagios:${{ env.action_mytag }} to DockerHub"
           docker buildx build \
             --progress plain \
